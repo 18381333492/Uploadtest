@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploadtest", "Uploadtest\Uploadtest.csproj", "{36D3F72D-FA8A-4622-80CA-06DF0F60B67B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpPost", "HttpPost\HttpPost.csproj", "{7399672C-FB73-4A41-9B5C-6DCCE354FEEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36D3F72D-FA8A-4622-80CA-06DF0F60B67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D3F72D-FA8A-4622-80CA-06DF0F60B67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D3F72D-FA8A-4622-80CA-06DF0F60B67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D3F72D-FA8A-4622-80CA-06DF0F60B67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7399672C-FB73-4A41-9B5C-6DCCE354FEEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7399672C-FB73-4A41-9B5C-6DCCE354FEEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7399672C-FB73-4A41-9B5C-6DCCE354FEEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7399672C-FB73-4A41-9B5C-6DCCE354FEEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

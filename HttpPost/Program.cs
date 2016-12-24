@@ -31,39 +31,65 @@ namespace HttpPost
 		static void PostData()
 		{
 
-			string sUrl = "http://localhost:8888/Api/Values/Test?Name=tangtai";
+			string sUrl = "http://localhost:8888/Api/Values/Test";
 			HttpWebRequest request = HttpWebRequest.Create(sUrl) as HttpWebRequest;
 			request.Timeout = 3000 * 1000;
 			request.Method = "POST";
-            request.ContentType = "application/json";
+            // request.ContentType = "application/octet-stream";
+            // request.ContentType = "application/x-www-form-urlencoded";
+            // request.ContentType = "multipart/form-data";
 
-            string dsf = "fdsfsdf";
-            dsf = JsonConvert.SerializeObject("dsf");
+            //********************************只要不模拟表单上传数据或者其他资源可以不需要设置ContentType*********************************//
+
+            //  string dsf = "fdsfsdf";
+            //  dsf = JsonConvert.SerializeObject("dsf");
             //
             //request.ContentType = "multipart/form-data; boundary=" + boundary; //这里是必须的
             //Stream RequestStream = request.GetRequestStream();
 
-            //string data = "user=fdsf";
+            string data = "Name=fdfdfd";
             //StringBuilder ContentHeader = new StringBuilder();
             //var dataByte = Encoding.UTF8.GetBytes(ContentHeader.ToString());
 
-            //byte[] databyte = System.Text.Encoding.UTF8.GetBytes(data);
+            byte[] databyte = System.Text.Encoding.ASCII.GetBytes(data);
             //RequestStream.Write(databyte, 0, databyte.Length);
             //RequestStream.Close();
 
             //request.GetResponse();
-            FileStream fs = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + "uploadimg.jpg", FileMode.Open, FileAccess.Read);
 
-            byte[] buffur = new byte[fs.Length];
-            fs.Read(buffur, 0, (int)fs.Length);
-            //关闭资源  
-            fs.Close();
+            //FileStream fs = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + "uploadimg.jpg", FileMode.Open, FileAccess.Read);
 
-            Stream rew = request.GetRequestStream();
+            //byte[] buffur = new byte[fs.Length];
+            //fs.Read(buffur, 0, (int)fs.Length);
+            ////关闭资源  
+            //fs.Close();
 
-            rew.Write(buffur, 0, buffur.Length);
+          //  request.ContentLength = databyte.Length;
+            Stream rew = request.GetRequestStream();//请求类型为POST的时候才可以设置请求的数据流,Get的时候会抛出异常    
+            rew.Write(databyte, 0, databyte.Length);
 
-            Stream s=request.GetResponse().GetResponseStream();//请求类型为POST的时候才可以设置请求的数据流,Get的时候会抛出异常
+            rew.Close();
+
+            //那如果我们想获得错误发生时候服务器段错误页面的源代码该如何做呢？ 
+
+            ////其实非常非常简单的做法，我们用下面的代码就不论错误发生与否，都可以获得服务器段页面的源代码。
+            HttpWebResponse resp;
+            try
+            {
+                resp = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                resp = (HttpWebResponse)ex.Response;
+                StreamReader sr = new StreamReader(resp.GetResponseStream());
+                string exSt = sr.ReadToEnd();
+            }
+            //那如果我们想获得错误发生时候服务器段错误页面的源代码该如何做呢？ 
+            ////其实非常非常简单的做法，我们用下面的代码就不论错误发生与否，都可以获得服务器段页面的源代码。
+
+            Stream s =request.GetResponse().GetResponseStream();
+            //
+            //“ 远程服务器返回错误: (411) 所需的长度” -----POST 请求没有传参数的时候会报411错误
 
             StreamReader read = new StreamReader(s,Encoding.Unicode);
             //使用什么编码
